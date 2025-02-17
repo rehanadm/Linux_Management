@@ -1,0 +1,30 @@
+###Configure yum Local Repository In RHEL/CentOS 7 & 8
+
+1. COPY ISO image into the the system. Usually I use FileZilla or WinsSCP to /media
+
+2. Confirm that the ISO is in the system
+# cd /media/
+# ls
+
+3. Create a mount point for the ISO.
+# mkdir /mnt/iso_dir
+
+4.Mount the ISO
+# mount /media/rhel-server-7.5-x86_64-dvd.iso /mnt/iso_dir/
+
+5. Verify the packages file.
+#cd /mnt/iso_dir/
+#ls
+
+6.create the repository configuration file in the “/etc/yum.repos.d” directory and make sure it has the “.repo” extension.
+#vim /etc/yum.repos.d/my_local_repo.repo
+
+[my_local_repo]
+baseurl=file:///mnt/iso_dir
+gpgcheck=0
+enable=1
+name=my local repository
+
+7. confirm the repository has been configured
+
+#yum repolist
